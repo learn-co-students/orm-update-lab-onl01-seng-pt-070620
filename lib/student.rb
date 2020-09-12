@@ -41,21 +41,18 @@ class Student
     end
   end
 
-  def self.create(name:, grade:)
+  def self.create(name, grade)
     student = Student.new(name, grade)
     student.save
     student
   end
 
   def self.new_from_db(row)
-    student = self.new
-    student.id = row[0]
-    student.name = row[1]
-    student.grade = row[2]
+    student = self.new(row[0], row[1], row[2])
     student
   end
 
-  def self.find_by_name
+  def self.find_by_name(name)
     sql = <<-SQL
     SELECT * FROM students
     WHERE name = ?;
@@ -67,7 +64,7 @@ class Student
 
   def update
     sql = <<-SQL
-    UPDATE students SET name = ?, grade = ?, WHERE id = ?;
+    UPDATE students SET name = ?, grade = ? WHERE id = ?;
     SQL
     DB[:conn].execute(sql, self.name, self.grade, self.id)
   end
