@@ -62,11 +62,17 @@ class Student
   #   Student.new(array[0], array[1], array[2])
   # end
     def self.new_from_db(array)
-    student = self.new(array[0], array[1], array[2])
+      student = self.new 
+      student.id = array[0]
+      student.name = array[1]
+      student.grade = array[2]
+      student 
+   
+  end 
+  # student = self.new(array[0], array[1], array[2])
     # student.id = array[0]
     # student.name = array[1]
     # student.grade = array[2]
-  end 
   def self.find_by_name(name)
     sql = <<-SQL 
     SELECT *
