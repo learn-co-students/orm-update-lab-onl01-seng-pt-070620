@@ -37,7 +37,6 @@ class Student
       DB[:conn].execute(sql, self.name, self.grade)
       @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
     end
-    #binding.pry
   end
 
   def self.create(name, grade)
@@ -64,7 +63,7 @@ class Student
 
   def update
     sql = "UPDATE students SET name = ?, grade = ? WHERE name = ?"
-    DB[:conn].execute(sql, self.name, self.grade, self.name)
+    DB[:conn].execute(sql, self.name, self.grade)
   end
   # Remember, you can access your database connection anywhere in this class
   #  with DB[:conn]
